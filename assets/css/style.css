@@ -1,0 +1,27 @@
+body{
+
+}
+
+.highlight{
+
+}
+
+.text{
+
+}
+
+.pre_start{
+    display: none;
+}
+
+.post_start{
+    display: inline;
+}
+
+.hover-on{
+    background-color: blue;
+}
+
+.hover-off{
+    background-color: red;
+}
