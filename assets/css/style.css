@@ -10,11 +10,11 @@ body{
 
 }
 
-.pre_start{
+.hidden{
     display: none;
 }
 
-.post_start{
+.display{
     display: inline;
 }
 
