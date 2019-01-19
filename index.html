@@ -12,26 +12,33 @@
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <title>TriviaGame</title>
 </head>
-<body background="">
+<body>
     <div id="game_board">
-        <header>
+        <header class=".col-md-12" align="center">
             Totally Trivial Trivia!
         </header>
 
-        <div id="question_area" class="highlight">
-            <div id="start">
+        <div id="question_area">
+            <div id="start" class="tile">
                 Start
             </div>
             <div id="hidden">
                 <div id="timer">
                 </div>
-                <div id="question" class="tile">
+                <div id="question">
                 </div>
-                <div id="answers" class="tile">
-                    <div id="option_1" class="option"></div>
-                    <div id="option_2" class="option"></div>
-                    <div id="option_3" class="option"></div>
+                <div id="answers">
+                    <div id="option_1" class="option tile"></div>
+                    <div id="option_2" class="option tile"></div>
+                    <div id="option_3" class="option tile"></div>
                 </div>
+            </div>
+            <div id="hidden_2">
+                <div id="timer">
+                </div>
+                <div id="info">
+                </div>
+                <img id="answer_img" src="" alt="">
             </div>
         </div>
     </div>
