@@ -12,7 +12,7 @@ var questions = [{
     Option_3: "425 to 454",
     Answer: "425 to 454",
     Src: "./assets/images/m4.jpg",
-    Info:"425 to 454! Depending on trim of course. Don't even get me started on aftermarket possibilites!"
+    Info: "425 to 454! Depending on trim of course. Don't even get me started on aftermarket possibilites!"
 }, {
     Question: "What competition is a WRX likely to partake in?",
     Option_1: "Formula 1",
@@ -20,7 +20,7 @@ var questions = [{
     Option_3: "NASCAR",
     Answer: "Rally Racing",
     Src: "./assets/images/wrx.jpg",
-    Info:"The car has a long lineage of both street and showcar presentations, but most adventerously, it's Symmetrical AWD makes it perfect for ripping through curves in any condition!"
+    Info: "The car has a long lineage of modding and car shows, but most adventerously, it's AWD makes it perfect for ripping through mud & snow in rally racing!"
 }, {
     Question: "What's the liter size engine on the 2015 Genesis Coupe?",
     Option_1: "3.8L",
@@ -28,7 +28,7 @@ var questions = [{
     Option_3: "All of the above",
     Answer: "All of the above",
     Src: "./assets/images/genny.jpg",
-    Info:"Trick question, how can it be both? They've given the option to the public! A 2.0 with a melodic turbo, or a 3.8 for those who just want to grip the road with power."
+    Info: "Trick question, how can it be both? They've given the option to the public! A 2.0 with a melodic turbo, or a 3.8 for those who just want to grip the road with power."
 }, {
     Question: "Which is the most expensive?",
     Option_1: "Porsche 911 GT3-R",
@@ -36,7 +36,7 @@ var questions = [{
     Option_3: "Mercedez AMG GT-R",
     Answer: "Porsche 911 GT3-R",
     Src: "./assets/images/911.jpg",
-    Info:"Get ready for this.. Starting at $187,500, the Porsche comes out on top, but really they're all within the same price range.."
+    Info: "Get ready for this.. Starting at $187,500, the Porsche comes out on top, but really they're all within the same price range.."
 }, {
     Question: "How is the boost shot from a turbocharger measured?",
     Option_1: "PSI",
@@ -44,7 +44,7 @@ var questions = [{
     Option_3: "Torque",
     Answer: "PSI",
     Src: "./assets/images/psi.jpg",
-    Info:"Coming through that beautiful little turbine, the air being sent to the cars cylinders is meausered in Pounds per Square Inch. "
+    Info: "Coming through that beautiful little turbine, the air being sent to the cars cylinders is meausered in Pounds per Square Inch. "
 }, {
     Question: "Wheels pointing left.. Car turning right.. What's happening?",
     Option_1: "Kickflip",
@@ -52,7 +52,7 @@ var questions = [{
     Option_3: "Drifting",
     Answer: "Drifting",
     Src: "./assets/images/doc.jpg",
-    Info:"Whether you do it yourself, you're watching Tokyo Drift or even in Disney's Cars.. Doc Hudson explains to Lightning McQueen 'If you're going hard enough left, you'll find yourself going right."
+    Info: "Whether you do it yourself, you're watching Tokyo Drift or even in Disney's Cars.. Doc Hudson explains to Lightning McQueen 'If you're going hard enough left, you'll find yourself going right."
 }, {
     Question: "Which of these is the quickest among the others?",
     Option_1: "Tesla Model X P100D",
@@ -60,7 +60,7 @@ var questions = [{
     Option_3: "Jeep Grand Cherokee Trackhawk",
     Answer: "Tesla Model X P100D",
     Src: "./assets/images/tesla.jpg",
-    Info:"Aside from its much lighter weight in comparison to the runner ups; The Tesla Model X has an electric powertrain, eliminating the possibility of lag in a mechanical engine"
+    Info: "Aside from its much lighter weight in comparison to the runner ups; The Tesla Model X has an electric powertrain, eliminating the possibility of lag in a mechanical engine"
 }, {
     Question: "Which of these has the highest HP?",
     Option_1: "Cadillac CTS-V",
@@ -68,143 +68,165 @@ var questions = [{
     Option_3: "Dodge Demon",
     Answer: "Dodge Demon",
     Src: "./assets/images/demon.jpg",
-    Info:"Not too old of a release, the Dodge Demon blew enthusiasts away by having the most powerful V8 engine ever mass produced with a stock HP of 840!"
+    Info: "Not too old of a release, the Dodge Demon blew enthusiasts away by having the most powerful V8 engine ever mass produced with a stock HP of 840!"
 }];
 var random_question;
-var time= 10;
-function begin(){
-    $('#start').on('click', function(){
-        $('#start').empty();
-        $('#hidden').attr('id', 'display');
+var questions2 = Array.from(questions);
+var timer_display;
+var time = 10;
+
+function begin() {
+    $('#answer_img').hide();
+    $('#reset').hide();
+    $('#hidden').hide();
+    $('#start').on('click', function () {
+        $('#start').hide();
+        $('#hidden').show();
         generate();
-        console.log("Begin ran");
+        check_answer();
+        continueToQuestion();
         timer_ready();
     });
 }
 
-function generate(){
-    random_question = questions[Math.floor(Math.random() * questions.length)];
-        $('#question').html('<h1>' + random_question.Question + '</h1>');
-            
-        $('#option_1').html('<h1>' + random_question.Option_1 + '</h1>');
-            
-        $('#option_2').html('<h1>' + random_question.Option_2 + '</h1>');
-           
-        $('#option_3').html('<h1>' + random_question.Option_3 + '</h1>');
-        
-        questions.splice($.inArray(random_question, questions),1);
-
-        console.log(questions.length);
-        console.log("Generate ran");
-      
-}
-
-function questionToContinue(){
-    clearInterval(question_timer);
-    continue_timer = setInterval("next_question()", 10000);
-}
-
-function continueToQuestion(){
-    clearInterval(continue_timer);
-    question_timer = setInterval("no_answer()", 10000);
-}
-//figure how to log time on screen and how to log questions that were not answered
-function timer_ready(){
-    if( timer_running === false){
-        question_timer = setInterval("no_answer()", 10000); 
-        console.log("Timer_ready ran");
+function timer_ready() {
+    if (timer_running === false) {
+        question_timer = setInterval("no_answer()", 10000);
+        timer_running = true;
     }
 }
 
-function no_answer(){  
+function generate() {
+    random_question = questions[Math.floor(Math.random() * questions.length)];
+
+    $('#timer').html('<h1> Time Left: ' + time + '</h1>');
+
+    $('#question').html('<h1>' + random_question.Question + '</h1>');
+
+    $('#option_1').html('<h1>' + random_question.Option_1 + '</h1>');
+
+    $('#option_2').html('<h1>' + random_question.Option_2 + '</h1>');
+
+    $('#option_3').html('<h1>' + random_question.Option_3 + '</h1>');
+
+    questions.splice($.inArray(random_question, questions), 1);
+}
+
+function questionToContinue() {
+    clearInterval(continue_timer);
+    clearInterval(question_timer);
+    clearInterval(timer_display);
+    timer_running = false;
+    continue_timer = setInterval("next_question()", 5000);
+}
+
+function continueToQuestion() {
+    clearInterval(continue_timer);
+    time = 10;
+    timer_display = setInterval(function () {
+        time--;
+        $('#timer').html('<h1> Time Left: ' + time + '</h1>');
+    }, 1000);
+    timer_running = true;
+    question_timer = setInterval("no_answer()", 10000);
+}
+
+function no_answer() {
+    if (questions.length === 0) {
+        $('.option').off('click');
+        clearInterval(timer_display);
+        clearInterval(question_timer);
+        clearInterval(continue_timer);
+        $('#hidden_2').show();
+        $('#timer').hide();
+        $('#question').hide();
+        $('#message').html('<h1>All done, here is how you did!</h1>');
+        $('#option_1').html('<h1>Correct Answers: ' + correct + '</h1>');
+        $('#option_2').html('<h1>Inorrect Answers: ' + incorrect + '</h1>');
+        $('#option_3').html('<h1>Unanswered: ' + unanswered + '</h1>');
+        $('#reset').show();
+        //$('#reset').on('click', reset);
+    } else {
+        clearInterval(timer_display);
         questionToContinue();
         empty();
-        $('#timer').html('<h1>Time is up!</h1>');
+        $('#hidden_2').show();
+        $('#message').html('<h1>Time is up!</h1>');
         $('#info').html('<h1>' + random_question.Info + '</h1>');
+        $('#answer_img').show();
         $("#answer_img").attr("src", random_question.Src);
         unanswered++;
-        time--;
-        console.log("No_answer ran");
+    }
 }
 
-function check_answer(){
-    console.log("Check_answer ran");
-    $('.option').on('click',function(){
+function check_answer() {
+    $('.option').on('click', function () {
         user_answer = $(this).text();
-        console.log(user_answer);
-       empty();
-       questionToContinue();
-
-        if(user_answer === random_question.Answer){
-            $('#timer').html('<h1>Correct!</h1>');
+        empty();
+        questionToContinue();
+        $('#hidden_2').show();
+        if (user_answer === random_question.Answer) {
+            $('#message').html('<h1>Correct!</h1>');
             $('#info').html('<h1>' + random_question.Info + '</h1>');
+            $("#answer_img").show();
             $("#answer_img").attr("src", random_question.Src);
             correct++;
-            console.log("user correct ran");
         } else if (user_answer !== random_question.Answer) {
-            $('#timer').html('<h1>Wrong!</h1>');
+            $('#message').html('<h1>Wrong!</h1>');
             $('#info').html('<h1>' + random_question.Info + '</h1>');
+            $("#answer_img").show();
             $("#answer_img").attr("src", random_question.Src);
             incorrect++;
-            console.log("user wrong ran");
-            }
-        });
+        }
+    });
 }
 
-function empty(){
+function empty() {
     $('#question').empty();
     $('.option').empty();
     $('#timer').empty();
+    $('#message').empty();
     $('#answer_img').attr("src", "");
     $('#info').empty();
-    console.log("empty ran");
 }
 
-function next_question(){
+function next_question() {
+    $("#answer_img").hide();
     empty();
-    continueToQuestion();
-    if(questions.length === 0){
+    if (questions.length === 0) {
+        $('.option').off('click');
+        clearInterval(timer_display);
         clearInterval(question_timer);
-        console.log("stop questions ran");
-        $('#hidden_2').attr('class', 'hidden');
-        $('#timer').html('<h1>All done, here is how you did!</h1>');
-        $('#option_1').html('<h1>Correct Answers: ' + correct +'</h1>');
-        $('#option_2').html('<h1>Inorrect Answers: ' + incorrect +'</h1>');
-        $('#option_3').html('<h1>Unanswered: ' + unanswered +'</h1>');
-        //reset.css button
-        console.log("no more questions ran");
-        $('#hidden').append('<button>Play Again?</button>');
-        // $('button').on(click, function(){});
+        clearInterval(continue_timer);
+        $('#hidden_2').show();
+        $('#timer').hide();
+        $('#question').hide();
+        $('#message').html('<h1>All done, here is how you did!</h1>');
+        $('#option_1').html('<h1>Correct Answers: ' + correct + '</h1>');
+        $('#option_2').html('<h1>Inorrect Answers: ' + incorrect + '</h1>');
+        $('#option_3').html('<h1>Unanswered: ' + unanswered + '</h1>');
+        $('#reset').show();
+        //$('#reset').on('click', reset);
     } else {
+        timer_running = true;
+        continueToQuestion();
         random_question = questions[Math.floor(Math.random() * questions.length)];
+
+        $('#timer').html('<h1> Time Left: ' + time + '</h1>');
+
         $('#question').html('<h1>' + random_question.Question + '</h1>');
-                    
+
         $('#option_1').html('<h1>' + random_question.Option_1 + '</h1>');
-            
+
         $('#option_2').html('<h1>' + random_question.Option_2 + '</h1>');
-        
+
         $('#option_3').html('<h1>' + random_question.Option_3 + '</h1>');
-        
-        questions.splice($.inArray(random_question, questions),1);
-        console.log("new questions ran");
-        console.log(questions.length);
-        console.log(random_question.Question);
-        
+
+        questions.splice($.inArray(random_question, questions), 1);
+
+
+
     }
 }
 
-function highlight(){
-    $(".tile").hover(function(){
-        $(this).attr("class", "hover_on");
-        }, function(){
-        $(this).attr("class", "hover_off");
-      });
-}
-
-function reset(){
-}
-function display_time(){
-    $("#timer").text("Time Left: " + time);
-}
 begin();
-check_answer();

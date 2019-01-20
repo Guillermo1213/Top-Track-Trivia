@@ -3,23 +3,25 @@ background-image: url('https://cdn.pixabay.com/photo/2017/12/04/20/26/race-29978
 background-repeat: repeat;
 background-size: cover;
 background-position: center;
+height: 100%;
 }
 
 #game_board{
     background-color: rgba(255,255,255, 0.3);
-    margin: 20px;
-    padding: 0px;
-    
+    margin: 5px;
+    padding-bottom: 5px;
+    padding-top: 0px;
 }
 
-#start{
-    margin: 50px;
-    font-size: 80px;
+#button{
+    margin: 5px;
+    font-size: 6vw;
 }
+
 
 #header{
     background-color: rgba(255,255,255, 0.3);
-    font-size: 100px;
+    font-size: 8vw;
     font-family: 'Racing Sans One', cursive;
     text-decoration: underline;
     text-shadow: 4px 4px whitesmoke;
@@ -27,27 +29,24 @@ background-position: center;
     padding: 30px;
 }
 
+.hidden{
+    display: none;
+}
+
+#display{
+    display: inline;
+}
+
 div:not(.jumbotron){
-    font-size: xx-large;
+    font-size: 6vw;
     font-weight: bold;
     color: whitesmoke;
     text-shadow: 2px 2px black;
     text-align: center;
 }
 
-#hidden{
-    display: none;
-}
-
-.display{
-    display: inline;
-}
-
-.hover-on{
-    background-color: blue;
-}
-
 img{
     margin: auto;
     width: 80%;
+    border: solid 4px whitesmoke;
 }
