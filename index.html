@@ -10,19 +10,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <sript src=https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js></sript>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Racing+Sans+One" rel="stylesheet">
     <title>TriviaGame</title>
 </head>
 <body>
-    <div id="game_board">
-        <header class=".col-md-12" align="center">
-            Totally Trivial Trivia!
-        </header>
+    <div id="game_board" class="jumbotron jumbotron-fluid">
+        <div id="header" class="jumbotron jumbotron-fluid .col-md-12">
+            Car Trivia Tune Up
+        </div>
 
         <div id="question_area">
             <div id="start" class="tile">
                 Start
             </div>
-            <div id="hidden">
+            <div id="hidden" class="hidden">
                 <div id="timer">
                 </div>
                 <div id="question">
@@ -33,12 +34,12 @@
                     <div id="option_3" class="option tile"></div>
                 </div>
             </div>
-            <div id="hidden_2">
+            <div id="hidden_2" class="hidden">
                 <div id="timer">
                 </div>
                 <div id="info">
                 </div>
-                <img id="answer_img" src="" alt="">
+                <img id="answer_img" class="img-fluid" src="" alt="">
             </div>
         </div>
     </div>

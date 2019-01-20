@@ -71,7 +71,7 @@ var questions = [{
     Info:"Not too old of a release, the Dodge Demon blew enthusiasts away by having the most powerful V8 engine ever mass produced with a stock HP of 840!"
 }];
 var random_question;
-
+var time= 10;
 function begin(){
     $('#start').on('click', function(){
         $('#start').empty();
@@ -108,7 +108,6 @@ function continueToQuestion(){
     clearInterval(continue_timer);
     question_timer = setInterval("no_answer()", 10000);
 }
-
 //figure how to log time on screen and how to log questions that were not answered
 function timer_ready(){
     if( timer_running === false){
@@ -116,7 +115,7 @@ function timer_ready(){
         console.log("Timer_ready ran");
     }
 }
-//does the timer hit 0?
+
 function no_answer(){  
         questionToContinue();
         empty();
@@ -124,6 +123,7 @@ function no_answer(){
         $('#info').html('<h1>' + random_question.Info + '</h1>');
         $("#answer_img").attr("src", random_question.Src);
         unanswered++;
+        time--;
         console.log("No_answer ran");
 }
 
@@ -203,6 +203,8 @@ function highlight(){
 
 function reset(){
 }
-
+function display_time(){
+    $("#timer").text("Time Left: " + time);
+}
 begin();
 check_answer();
